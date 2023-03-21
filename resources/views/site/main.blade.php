@@ -2,10 +2,6 @@
 @section('titulo', 'Main')
 @section('content')
 
-
-
-@include('layouts._partials.top')
-
 <div class="conteudo-destaque">
 
     <div class="esquerda">
