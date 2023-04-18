@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactController;
-
+use App\Http\Middleware\LogAcessoMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +17,7 @@ use App\Http\Controllers\ContactController;
 |
 */
 
-Route::get('/', [MainController::class, 'main'])->name('site.main');
+Route::get('/', [MainController::class, 'main'])->name('site.main')->middleware(LogAcessoMiddleware::class);
 Route::get('/about', [AboutController::class, 'about'])->name('site.about');
 Route::get('/contact', [ContactController::class, 'contact'])->name('site.contact');
 Route::post('/contact', [ContactController::class, 'contact'])->name('site.contact');
