@@ -9,5 +9,5 @@ class MotivoContato extends Model
 {
     use HasFactory;
 
-    protected $fillabe = ['motivo_contato'];
+    protected $fillabe = ['motivo_contatos'];
 }

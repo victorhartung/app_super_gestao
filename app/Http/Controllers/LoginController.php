@@ -32,7 +32,14 @@ class LoginController extends Controller
 
         $user = new User();
 
-        $existe = $user->where('email', $email)->where('password', $password)->get()->first();
+        $usuario = $user->where('email', $email)->where('password', $password)->get()->first();
+
+        if(isset($usuario->name)) {
+            echo 'usuario existe';
+
+        }else{ 
+            echo 'não existe';
+        }
 
     }
 }
