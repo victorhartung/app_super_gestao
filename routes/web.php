@@ -34,9 +34,9 @@ Route::prefix('/app')->group(function(){
         Route::get('/home', [HomeController::class, 'index'])->name('app.home');
         Route::get('/sair', [LoginController::class, 'sair'])->name('app.sair');
 
-        Route::get('/clients', function(){ return 'clients';})->name('app.clients');
-        Route::get('/providers', function(){ return 'providers';})->name('app.providers');
-        Route::get('/products', function(){ return 'products';})->name('app.products');
+        Route::get('/client', function(){ return 'clients';})->name('app.client');
+        Route::get('/provider', function(){ return 'providers';})->name('app.provider');
+        Route::get('/product', function(){ return 'products';})->name('app.product');
 
     });
 });
