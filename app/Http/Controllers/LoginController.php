@@ -50,6 +50,7 @@ class LoginController extends Controller
             $_SESSION['nome'] = $usuario->nome;
             $_SESSION['email'] = $usuario->email;
 
+            return redirect()->route('app.home');
         
         }else{ 
             
@@ -60,7 +61,9 @@ class LoginController extends Controller
 
     public function sair() {
 
-        return 'sair';
+       session_destroy();
+       
+       return redirect()->route('site.index');
 
     }
 }
