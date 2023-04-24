@@ -33,10 +33,11 @@ Route::prefix('/app')->group(function(){
     Route::middleware(['autenticacao:padrao, visitante'])->group(function () {
         Route::get('/home', [HomeController::class, 'index'])->name('app.home');
         Route::get('/sair', [LoginController::class, 'sair'])->name('app.sair');
-
+        Route::get('/provider', [ProviderController::class, 'index'])->name('app.provider');
+        Route::post('/provider/list', [ProviderController::class, 'list'])->name('app.provider.list');
+        Route::post('/provider/add', [ProviderController::class, 'add'])->name('app.provider.add');
         Route::get('/client', [ClientController::class, 'index'])->name('app.client');
         Route::get('/provider', [ProviderController::class, 'index'])->name('app.provider');
         Route::get('/product', [ProductController::class, 'index'])->name('app.product');
-
     });
 });
