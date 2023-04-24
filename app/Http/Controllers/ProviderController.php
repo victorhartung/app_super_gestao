@@ -13,13 +13,21 @@ class ProviderController extends Controller
     
     }
 
-    public function list() {
+    public function list(Request $request) {
 
-        return view('app.provider.list');
+        $fornecedores = Fornecedor::where('nome', 'like', '%'.$request->input('nome').'%')
+            ->where('nome', 'like', '%'.$request->input('site').'%')
+            ->where('nome', 'like', '%'.$request->input('uf').'%')
+            ->where('nome', 'like', '%'.$request->input('email').'%')
+            ->get();
+
+        return view('app.provider.list', ['fornecedores' => $fornecedores]);
 
     }
 
     public function add(Request $request) {
+
+        $msg = '';
 
         if($request->input('_token') != '') {
             
@@ -43,10 +51,20 @@ class ProviderController extends Controller
 
             $fornecedor = new Fornecedor();
             $fornecedor->create($request->all());
+
+            $msg = 'Cadastro Realizado com sucesso!';
         
         }
 
-        return view('app.provider.add');
+        return view('app.provider.add', ['msg' => $msg]);
 
+    }
+
+    public function edit($id) {
+        
+        $fornecedor = Fornecedor::find($id);
+
+        return view('app.provider.add', ['fornecedor' => $fornecedor]);
+    
     }
 }
