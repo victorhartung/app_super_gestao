@@ -39,5 +39,7 @@ Route::prefix('/app')->group(function(){
         Route::get('/client', [ClientController::class, 'index'])->name('app.client');
         Route::get('/provider', [ProviderController::class, 'index'])->name('app.provider');
         Route::get('/product', [ProductController::class, 'index'])->name('app.product');
+    
     });
+
 });
