@@ -29,7 +29,7 @@ class ProviderController extends Controller
 
         $msg = '';
 
-        if($request->input('_token') != '') {
+        if($request->input('_token') != '' && $request->input('id') == '') {
             
             $regras = [
                 'nome' => 'required|min:3|max:40',
@@ -53,18 +53,40 @@ class ProviderController extends Controller
             $fornecedor->create($request->all());
 
             $msg = 'Cadastro Realizado com sucesso!';
-        
+            
+            
         }
 
-        return view('app.provider.add', ['msg' => $msg]);
+        if($request->input('_token') != '' && $request->input('id') == '') {
 
+            $fornecedor = Fornecedor::find($request->input('id'));
+            
+            $update = $fornecedor->update($request->all());
+
+            if($update) {
+            
+                $msg = 'Atualização realizada com sucesso!';
+            
+            }else{ 
+                
+                $msg = 'Tente novamente';
+            
+            }
+
+            return redirect()->route('app.provider.edit', ['id' => $request->input('id'), 'msg' => $msg]);
+        }
+
+        
+
+        return view('app.provider.add', ['msg' => $msg]);
+    
     }
 
-    public function edit($id) {
+    public function edit($id, $msg = '') {
         
         $fornecedor = Fornecedor::find($id);
 
-        return view('app.provider.add', ['fornecedor' => $fornecedor]);
+        return view('app.provider.add', ['fornecedor' => $fornecedor, 'msg' => $msg]);
     
     }
 }

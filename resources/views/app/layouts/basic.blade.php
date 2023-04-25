@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="{{asset('css/style.css')}}">
     </head>
     <body>
-        @include('site.layouts._partials.top')
+        @include('app.layouts._partials.top')
         @yield('content')
 </body>
 </html>

@@ -3,10 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\HomeController;
 
 
 /*
@@ -25,7 +27,7 @@ Route::get('/about', [AboutController::class, 'about'])->name('site.about');
 Route::get('/contact', [ContactController::class, 'contact'])->name('site.contact');
 Route::post('/contact', [ContactController::class, 'contact'])->name('site.contact');
 
-Route::get('/login{erro?}', [LoginController::class, 'index'])->name('site.login');
+Route::get('/login/{erro?}', [LoginController::class, 'index'])->name('site.login');
 Route::post('/login', [LoginController::class, 'autenticar'])->name('site.login');
 
 Route::prefix('/app')->group(function(){
@@ -40,7 +42,7 @@ Route::prefix('/app')->group(function(){
         Route::post('/provider/list', [ProviderController::class, 'list'])->name('app.provider.list');
         Route::get('/provider/add', [ProviderController::class, 'add'])->name('app.provider.add');
         Route::post('/provider/add', [ProviderController::class, 'add'])->name('app.provider.add');
-        Route::get('/provider/edit', [ProviderController::class, 'edit'])->name('app.provider.edit');
+        Route::get('/provider/edit/{id}/{msg?}', [ProviderController::class, 'edit'])->name('app.provider.edit');
 
         
     

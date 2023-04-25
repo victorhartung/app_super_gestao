@@ -63,7 +63,7 @@ class LoginController extends Controller
 
        session_destroy();
        
-       return redirect()->route('site.index');
+       return redirect()->route('site.main');
 
     }
 }
