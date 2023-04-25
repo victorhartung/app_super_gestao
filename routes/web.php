@@ -41,6 +41,7 @@ Route::prefix('/app')->group(function(){
         //fornecedor stack
         Route::get('/provider', [ProviderController::class, 'index'])->name('app.provider');
         Route::post('/provider/list', [ProviderController::class, 'list'])->name('app.provider.list');
+        Route::get('/provider/list', [ProviderController::class, 'list'])->name('app.provider.list');
         Route::get('/provider/add', [ProviderController::class, 'add'])->name('app.provider.add');
         Route::post('/provider/add', [ProviderController::class, 'add'])->name('app.provider.add');
         Route::get('/provider/edit/{id}/{msg?}', [ProviderController::class, 'edit'])->name('app.provider.edit');

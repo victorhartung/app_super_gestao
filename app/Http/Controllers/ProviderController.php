@@ -19,9 +19,9 @@ class ProviderController extends Controller
             ->where('nome', 'like', '%'.$request->input('site').'%')
             ->where('nome', 'like', '%'.$request->input('uf').'%')
             ->where('nome', 'like', '%'.$request->input('email').'%')
-            ->get();
+            ->paginate(2);
 
-        return view('app.provider.list', ['fornecedores' => $fornecedores]);
+        return view('app.provider.list', ['fornecedores' => $fornecedores, 'request' => $request->all()]);
 
     }
 
