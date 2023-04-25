@@ -89,4 +89,12 @@ class ProviderController extends Controller
         return view('app.provider.add', ['fornecedor' => $fornecedor, 'msg' => $msg]);
     
     }
+
+    public function delete($id) {
+        
+        Fornecedor::find($id)->delete();
+        Fornecedor::find($id)->forceDelete();
+
+        return redirect()->route('app.fornecedor');
+    }
 }
