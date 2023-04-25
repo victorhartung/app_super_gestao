@@ -41,9 +41,9 @@ class ProviderController extends Controller
             $feedback = [
                 'required' => 'O campo :attribute deve ser preenchido',
                 'nome.min' => 'O nome deve ter no minimo 3 caracteres',
-                'nome.max' => 'O nome dev ter no máximo 40 caracteres',
+                'nome.max' => 'O nome deve ter no máximo 40 caracteres',
                 'uf.min' => 'O nome deve ter no minimo 2 caracteres',
-                'uf.max' => 'O nome dev ter no máximo 2 caracteres',
+                'uf.max' => 'O nome deve ter no máximo 2 caracteres',
                 'email.email' => 'O campo e-mail não foi preenchido corretamente'
             ];
 

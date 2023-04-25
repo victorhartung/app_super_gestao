@@ -38,14 +38,13 @@ Route::prefix('/app')->group(function(){
         Route::get('/sair', [LoginController::class, 'sair'])->name('app.sair');
         Route::get('/client', [ClientController::class, 'index'])->name('app.client');
         
+        //fornecedor stack
         Route::get('/provider', [ProviderController::class, 'index'])->name('app.provider');
         Route::post('/provider/list', [ProviderController::class, 'list'])->name('app.provider.list');
         Route::get('/provider/add', [ProviderController::class, 'add'])->name('app.provider.add');
         Route::post('/provider/add', [ProviderController::class, 'add'])->name('app.provider.add');
         Route::get('/provider/edit/{id}/{msg?}', [ProviderController::class, 'edit'])->name('app.provider.edit');
-
         
-    
         Route::get('/product', [ProductController::class, 'index'])->name('app.product');
     
     });
