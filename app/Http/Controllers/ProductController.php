@@ -13,7 +13,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request) //exibir lista de registros
     {
         $produtos = Produto::paginate(10);
 
@@ -25,11 +25,11 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $reuest)
+    public function create(Request $request)  //exibir formulário de criação de registro
     {
-        $unidade = Unidade::all();
+        $unidades = Unidade::all();
 
-        return view('app.produto.create', ['unidades' => $unidades]);
+        return view('app.produto.create', ['unidade' => $unidades]);
     }
 
     /**
@@ -38,8 +38,29 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request) //receber formulário de criação do registro
     {
+
+        $regras = [
+            'nome' => 'required|min:3|max:40',
+            'descricao' => 'required|min:3|max:2000',
+            'peso' => 'required|integer',
+            'unidade_id' => 'exists:unidade,id',
+            //'unidade_id' => 'exists:<tabela>,<coluna>',
+        ];
+
+        $feedback = [
+            'required' => 'O campo :attribute deve ser preenchido',
+            'nome.min' => 'O campo nome deve ter no mínimo 3 caracteres',
+            'nome.max' => 'O campo nome deve ter no máximo 40 caracteres',
+            'descricao.min' => 'O campo descrição deve ter no mínimo 3 caracteres',
+            'descricao.max' => 'O campo descrição deve ter no máximo 2000 caracteres',
+            'peso.integer' => 'O campo peso deve ser um número inteiro',
+            'unidade_id' => 'A unidade de medida informada não existe'
+        ];
+
+        $request->validate($regras, $feedback);
+
         Produto::create($request->all());
 
         // $produto = new Produto();
@@ -51,8 +72,8 @@ class ProductController extends Controller
         // $produto->nome = $nome;
         // $produto->descricao = $descricao;
         // $produto->save();
-        
-        redirect()->route('produto.index');
+
+        return redirect()->route('produto.index');
     }
 
     /**
@@ -61,9 +82,9 @@ class ProductController extends Controller
      * @param  \App\Models\Produto  $produto
      * @return \Illuminate\Http\Response
      */
-    public function show(Produto $produto)
+    public function show(Produto $produto) //exibir registro específico 
     {
-        //
+        return view('app.product.show', ['produto' => $produto]);
     }
 
     /**
@@ -72,9 +93,10 @@ class ProductController extends Controller
      * @param  \App\Models\Produto  $produto
      * @return \Illuminate\Http\Response
      */
-    public function edit(Produto $produto)
+    public function edit(Produto $produto) // exibir formulário de edição do registro
     {
-        //
+        $unidades = Unidade::all();
+        return view('app.produto.edit', ['produto' => $produto->id, 'unidades' => $unidades]);
     }
 
     /**
@@ -84,7 +106,7 @@ class ProductController extends Controller
      * @param  \App\Models\Produto  $produto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Produto $produto)
+    public function update(Request $request, Produto $produto) // receber formulário de criação do registro
     {
 
        
@@ -96,7 +118,7 @@ class ProductController extends Controller
      * @param  \App\Models\Produto  $produto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Produto $produto)
+    public function destroy(Produto $produto) // receber dados de remoção do registro
     {
         //
     }
