@@ -14,7 +14,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $produtos = Produto::paginate(10);
+
+        return view('app.product.index', ['produtos' => $produtos, 'request' => $request->all()]);
     }
 
     /**
@@ -22,9 +24,9 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $reuest)
     {
-        //
+        
     }
 
     /**

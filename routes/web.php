@@ -45,9 +45,10 @@ Route::prefix('/app')->group(function(){
         Route::get('/provider/add', [ProviderController::class, 'add'])->name('app.provider.add');
         Route::post('/provider/add', [ProviderController::class, 'add'])->name('app.provider.add');
         Route::get('/provider/edit/{id}/{msg?}', [ProviderController::class, 'edit'])->name('app.provider.edit');
-        Route::get('/provider/delete/{id}/', [ProviderController::class, 'delete'])->name('app.provider.delete');
+        Route::get('/provider/delete/{id}', [ProviderController::class, 'delete'])->name('app.provider.delete');
         
-        Route::get('/product', [ProductController::class, 'index'])->name('app.product');
+        //products
+        Route::resource('product', ProductController::class);
     
     });
 
