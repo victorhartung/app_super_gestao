@@ -9,6 +9,7 @@ use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductDetailController;
 
 
 /*
@@ -52,7 +53,7 @@ Route::prefix('/app')->group(function(){
 
         //product details
 
-        Route::resource('product_details', ProductDetailController::class);
+        Route::resource('product-detail', ProductDetailController::class);
 
     
     });

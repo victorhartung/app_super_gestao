@@ -23,7 +23,7 @@ class ProductDetailController extends Controller
      */
     public function create()
     {
-        //
+        return view('app.product_detail.create');
     }
 
     /**
