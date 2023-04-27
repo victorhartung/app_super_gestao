@@ -96,7 +96,7 @@ class ProductController extends Controller
     public function edit(Produto $produto) // exibir formulário de edição do registro
     {
         $unidades = Unidade::all();
-        return view('app.produto.edit', ['produto' => $produto->id, 'unidades' => $unidades]);
+        return view('app.product.create', ['produto' => $produto->id, 'unidades' => $unidades]);
     }
 
     /**
@@ -109,7 +109,9 @@ class ProductController extends Controller
     public function update(Request $request, Produto $produto) // receber formulário de criação do registro
     {
 
-       
+        $produto->update($request->all());
+
+        return redirect()->route('product.show', ['produto' => $produto->id]);
     }
 
     /**
@@ -120,6 +122,8 @@ class ProductController extends Controller
      */
     public function destroy(Produto $produto) // receber dados de remoção do registro
     {
-        //
+        $produto->delete();
+     
+        return redirect()->route('product.index', ['produto' => $produto->id]);
     }
 }

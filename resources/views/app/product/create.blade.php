@@ -5,35 +5,25 @@
     <div class="conteudo-pagina">
         
         <div class="titulo-pagina-2">
+            @if(isset($produto->id))
+            <p>Editar produto</p>
+            @else
             <p>Adicionar produto</p>
+            @endif
         </div>
 
         <div class="menu">
             <ul>
-                <li><a href="{{route('produto.index')}}">Voltar</a></li>
+                <li><a href="{{route('product.index')}}">Voltar</a></li>
                 <li><a href="{{route('')}}">Consulta</a></li>
             </ul>
         </div>
 
         <div class="informacao-pagina">
             <div style="width: 30%; margin-left: auto; margin-right: auto;">
-                <form method="POST" action="{{route('produto.store')}}">
-                    @csrf
-                    <input type ="text" name="nome" value="{{ old('nome') ?? '' }}" placeholder="Nome" class="borda-preta">
-                    {{ $erros->has('nome') ? $errors->first('nome') : '' }}
-                    <input type ="text" name="descricao" value="{{ old('descricao') ?? '' }}" placeholder="Descrição" class="borda-preta">
-                    {{ $erros->has('descricao') ? $errors->first('descricao') : '' }}
-                    <input type ="text" name="peso" value="{{ old('peso') ?? '' }}" placeholder="Peso" class="borda-preta">
-                    {{ $erros->has('peso') ? $errors->first('peso') : '' }}
-                    <select name="unidade_id">
-                        <option>Selecione a Unidade de Medida</option>
-                        @foreach($unidades as $unidade)
-                            <option value="{{$unidade->id}}" {{ old('unidade_id') == $unidade->id ? 'selected' : '' }}>{{$unidade->descricao}}</option>
-                        @endforeach
-                    </select>
-                    {{$errors->has('unidade_id') ? $errors->first('unidade_id') : ''}}
-                    <button type="submit" class="borda-preta">Adicionar</button>
-                </form>
+               @component('app.product._components.form_create_edit')
+                   
+               @endcomponent
             </div>       
         </div>
     </div>
