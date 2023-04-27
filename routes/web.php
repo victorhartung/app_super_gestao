@@ -49,6 +49,11 @@ Route::prefix('/app')->group(function(){
         
         //products
         Route::resource('product', ProductController::class);
+
+        //product details
+
+        Route::resource('product_details', ProductDetailController::class);
+
     
     });
 

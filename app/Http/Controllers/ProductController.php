@@ -96,7 +96,7 @@ class ProductController extends Controller
     public function edit(Produto $produto) // exibir formulário de edição do registro
     {
         $unidades = Unidade::all();
-        return view('app.product.create', ['produto' => $produto->id, 'unidades' => $unidades]);
+        return view('app.product.edit', ['produto' => $produto->id, 'unidades' => $unidades]);
     }
 
     /**
