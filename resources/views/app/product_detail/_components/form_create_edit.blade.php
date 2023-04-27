@@ -3,15 +3,17 @@
     @csrf
     @method('PUT')
 @else
-<form method="POST" action="{{route('product.store')}}">
+<form method="POST" action="#">
     @csrf
 @endif
-    <input type ="text" name="produto_id " value="{{ $produto_detalhe->produto_id ?? old('produto_id ') }}" placeholder="Nome" class="borda-preta">
-    {{ $erros->has('nome') ? $errors->first('nome') : '' }}
-    <input type ="text" name="descricao" value="{{ $produto_detalhe->descricao ?? old('descricao') }}" placeholder="Descrição" class="borda-preta">
-    {{ $erros->has('descricao') ? $errors->first('descricao') : '' }}
-    <input type ="text" name="peso" value="{{ $produto_detalhe->peso ?? old('peso') }}" placeholder="Peso" class="borda-preta">
-    {{ $erros->has('peso') ? $errors->first('peso') : '' }}
+    <input type ="text" name="produto_id " value="{{ $produto_detalhe->produto_id ?? old('produto_id ') }}" placeholder="ID do Produto" class="borda-preta">
+    {{ $erros->has('produto_id') ? $errors->first('produto_id') : '' }}
+    <input type ="text" name="comprimento" value="{{ $produto_detalhe->comprimento ?? old('comprimento') }}" placeholder="Comprimento" class="borda-preta">
+    {{ $erros->has('comprimento') ? $errors->first('comprimento') : '' }}
+    <input type ="text" name="largura" value="{{ $produto_detalhe->largura ?? old('largura') }}" placeholder="Largura" class="borda-preta">
+    {{ $erros->has('largura') ? $errors->first('largura') : '' }}
+    <input type ="text" name="altura" value="{{ $produto_detalhe->altura ?? old('altura') }}" placeholder="Altura" class="borda-preta">
+    {{ $erros->has('altura') ? $errors->first('altura') : '' }}
     <select name="unidade_id">
         <option>Selecione a Unidade de Medida</option>
         @foreach($unidades as $unidade)
