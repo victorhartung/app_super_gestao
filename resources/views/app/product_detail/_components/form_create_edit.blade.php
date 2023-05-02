@@ -1,19 +1,19 @@
 @if(isset($produto_detalhe->id))
-<form method="POST" action="{{route('product.update', ['produto' => $produto_detalhe->id])}}">
+<form method="POST" action="{{route('product-detail.update', ['produto_detalhe' => $produto_detalhe->id])}}">
     @csrf
     @method('PUT')
 @else
-<form method="POST" action="#">
+<form method="POST" action="{{route('product-detail.store')}}">
     @csrf
 @endif
     <input type ="text" name="produto_id " value="{{ $produto_detalhe->produto_id ?? old('produto_id ') }}" placeholder="ID do Produto" class="borda-preta">
-    {{ $erros->has('produto_id') ? $errors->first('produto_id') : '' }}
+    {{ $errors->has('produto_id') ? $errors->first('produto_id') : '' }}
     <input type ="text" name="comprimento" value="{{ $produto_detalhe->comprimento ?? old('comprimento') }}" placeholder="Comprimento" class="borda-preta">
-    {{ $erros->has('comprimento') ? $errors->first('comprimento') : '' }}
+    {{ $errors->has('comprimento') ? $errors->first('comprimento') : '' }}
     <input type ="text" name="largura" value="{{ $produto_detalhe->largura ?? old('largura') }}" placeholder="Largura" class="borda-preta">
-    {{ $erros->has('largura') ? $errors->first('largura') : '' }}
+    {{ $errors->has('largura') ? $errors->first('largura') : '' }}
     <input type ="text" name="altura" value="{{ $produto_detalhe->altura ?? old('altura') }}" placeholder="Altura" class="borda-preta">
-    {{ $erros->has('altura') ? $errors->first('altura') : '' }}
+    {{ $errors->has('altura') ? $errors->first('altura') : '' }}
     <select name="unidade_id">
         <option>Selecione a Unidade de Medida</option>
         @foreach($unidades as $unidade)
