@@ -1,8 +1,8 @@
 {{$slot}}
 
-<form action="{{route('site.contact')}}" method="GET">
+<form action="{{route('site.contact')}}" method="POST">
     @csrf
-    <input name ="nome" value="" type="text" placeholder="Nome" class="{{$classe}}">
+    <input name ="nome" value="{{old('nome')}}" type="text" placeholder="Nome" class="{{$classe}}">
     @if($errors->has('nome'))
         {{$errors->first('nome')}}
     @endif
@@ -18,11 +18,11 @@
     <select name="motivo_contatos" class="{{$classe}}">
         <option value="1">Qual o motivo do contato?</option>
         @foreach($motivo_contatos as $key => $motivo)
-            <option value="{{$motivo->id}}" {{old('motivo') == $motivo_contato->id ? 'selected' : '' }}>{{$motivo->motivo_contato}}</option>
+            <option value="{{$motivo->id}}" {{old('motivo_contatos') == $motivo_contatos->id ? 'selected' : '' }}>{{$motivo->motivo_contatos}}</option>
         @endforeach
         
     </select>
-    {{$errors->has('motivos_contatos') ? $errors->first('motivos_contatos') : ''}}
+    {{$errors->has('motivo_contatos_id') ? $errors->first('motivo_contatos_id') : ''}}
     <br>
     <textarea name="mensagem" class="{{$classe}}">Preencha aqui a sua mensagem</textarea>
     {{$errors->has('mensagem') ? $errors->first('mensagem') : ''}}

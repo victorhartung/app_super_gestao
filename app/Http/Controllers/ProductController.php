@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Unidade;
 use App\Models\Produto;
+use App\Models\Item;
 use App\Models\ProdutoDetalhe;
 use Illuminate\Http\Request;
 
@@ -16,19 +17,19 @@ class ProductController extends Controller
      */
     public function index(Request $request) //exibir lista de registros
     {
-        $produtos = Produto::paginate(10);
+        $produtos = Item::paginate(10);
 
-        foreach($produtos as $key => $produto){ 
+        // foreach($produtos as $key => $produto){ 
             
-            $produtoDetalhe = ProdutoDetalhe::where('produto_id', $produto->id)->first();
+        //     $produtoDetalhe = ProdutoDetalhe::where('produto_id', $produto->id)->first();
 
-            if(isset($produtoDetalhe)) {
-                $produtos[$key]['comprimento'] = $produtoDetalhe->comprimento;
-                $produtos[$key]['largura'] = $produtoDetalhe->largura;
-                $produtos[$key]['altura'] = $produtoDetalhe->altura;
-            }
+        //     if(isset($produtoDetalhe)) {
+        //         $produtos[$key]['comprimento'] = $produtoDetalhe->comprimento;
+        //         $produtos[$key]['largura'] = $produtoDetalhe->largura;
+        //         $produtos[$key]['altura'] = $produtoDetalhe->altura;
+        //     }
         
-        }
+        // }
 
         return view('app.product.index', ['produtos' => $produtos, 'request' => $request->all()]);
     }

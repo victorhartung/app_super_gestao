@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\SiteContato;
 use App\Models\MotivoContato;
 
 class ContactController extends Controller
@@ -11,6 +12,7 @@ class ContactController extends Controller
         
         $motivo_contatos = MotivoContato::all();
 
+        dd($motivo_contatos);
         return view ('site.contact', ['titulo' => 'Contato', 'motivo_contatos' => $motivo_contatos]);
 
     }
@@ -49,7 +51,7 @@ class ContactController extends Controller
         ];
 
         $request->validate($regras, $feedback);
-
+        SiteContato::create($request->all());
         return redirect()->route('site.main');
 
     }
