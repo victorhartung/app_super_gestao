@@ -8,12 +8,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Fornecedor extends Model
 {
-
+    use HasFactory;
     use SoftDeletes;
 
     protected $table = 'fornecedores';
     protected $fillable = ['nome', 'site', 'uf' , 'email'];
 
 
-    use HasFactory;
+    public function produtos() {
+
+        return $this->hasMany('App\Models\Item', 'fornecedor_id', 'id');
+        //return $this->hasMany('App\Models\Item');
+
+    }
+
 }

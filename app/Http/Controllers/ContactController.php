@@ -12,7 +12,7 @@ class ContactController extends Controller
         
         $motivo_contatos = MotivoContato::all();
 
-        dd($motivo_contatos);
+  
         return view ('site.contact', ['titulo' => 'Contato', 'motivo_contatos' => $motivo_contatos]);
 
     }

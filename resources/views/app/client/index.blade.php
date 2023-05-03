@@ -1,11 +1,11 @@
 @extends('app.layouts.basic')
-@section('titulo', 'Produto')
+@section('titulo', 'Cliente')
 @section('content')
 
     <div class="conteudo-pagina">
         
         <div class="titulo-pagina-2">
-            <p>Produtos</p>
+            <p>Listagem de Clientes</p>
         </div>
 
         <div class="menu">
@@ -35,28 +35,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($produtos as $produto)
+                        @foreach($clientes as $cliente)
                         <tr>
-                            <td>{{ $produto->nome }}</td>
-                            <td>{{ $produto->descricao }}</td>
-                            <td>{{ $produto->fornecedor->nome }}</td>
-                            <td>{{ $produto->peso }}</td>
-                            <td>{{ $produto->unidade_id }}</td>
-                            <td>{{ $produto->produtoDetalhe->comprimento ?? '' }}</td>
-                            <td>{{ $produto->produtoDetalhe->largura ?? '' }}</td>
-                            <td>{{ $produto->produtoDetalhe->altura ?? '' }}</td>
-                            <td><a href="{{ route('product.show', ['produto' => $produto->id]) }}">Visualizar</a></td>
+                            
+                            <td>{{ $cliente->nome }}</td>
+                            <td><a href="{{ route('cliente.show', ['cliente' => $cliente->id]) }}">Visualizar</a></td>
                             
                                 <td>
-                                    <form method="post" id="form_{{$produto->id}}" action="{{route('product.destroy', ['produto' => $produto->id])}}">
+                                    <form method="post" id="form_{{$cliente->id}}" action="{{route('cliente.destroy', ['cliente' => $cliente->id])}}">
                                         @csrf
                                         @method('DELETE')
                                         {{-- <button type="submit">Excluir</button> --}}
-                                        <a href="#" onclick="document.getElementbyId('form_{{$produto->id}}').submit()">Excluir</a>
+                                        <a href="#" onclick="document.getElementbyId('form_{{$cliente->id}}').submit()">Excluir</a>
                                     </form>
                                 </td>
                             
-                            <td><a href="{{ route('product.edit', ['produto' => $produto->id]) }}">Editar</a></td>
+                            <td><a href="{{ route('cliente.edit', ['cliente' => $cliente->id]) }}">Editar</a></td>
                         </tr>
                         @endforeach
                     </tbody>

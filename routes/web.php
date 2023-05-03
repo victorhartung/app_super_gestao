@@ -37,7 +37,6 @@ Route::prefix('/app')->group(function(){
         
         Route::get('/home', [HomeController::class, 'index'])->name('app.home');
         Route::get('/sair', [LoginController::class, 'sair'])->name('app.sair');
-        Route::get('/client', [ClientController::class, 'index'])->name('app.client');
         
         //fornecedor stack
         Route::get('/provider', [ProviderController::class, 'index'])->name('app.provider');
@@ -55,7 +54,11 @@ Route::prefix('/app')->group(function(){
 
         Route::resource('product-detail', ProductDetailController::class);
 
-    
+        Route::resource('/client', [ClientController::class, 'index']);
+
+        Route::resource('/order', [OrderController::class, 'index']);
+
+        Route::resource('/order-product', [OrderProductController::class, 'index']);
     });
 
 });

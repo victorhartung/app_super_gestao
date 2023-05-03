@@ -15,7 +15,7 @@ class ProviderController extends Controller
 
     public function list(Request $request) {
 
-        $fornecedores = Fornecedor::where('nome', 'like', '%'.$request->input('nome').'%')
+        $fornecedores = Fornecedor::with(['produtos'])->where('nome', 'like', '%'.$request->input('nome').'%')
             ->where('nome', 'like', '%'.$request->input('site').'%')
             ->where('nome', 'like', '%'.$request->input('uf').'%')
             ->where('nome', 'like', '%'.$request->input('email').'%')

@@ -6,6 +6,7 @@ use App\Models\Unidade;
 use App\Models\Produto;
 use App\Models\Item;
 use App\Models\ProdutoDetalhe;
+use App\Models\Fornecedor;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -42,8 +43,9 @@ class ProductController extends Controller
     public function create(Request $request)  //exibir formulário de criação de registro
     {
         $unidades = Unidade::all();
+        $fornecedores = Fornecedor::all();
 
-        return view('app.product.create', ['unidades' => $unidades]);
+        return view('app.product.create', ['unidades' => $unidades, 'fornecedores' => $fornecedores]);
     }
 
     /**
@@ -110,17 +112,18 @@ class ProductController extends Controller
     public function edit(Produto $produto) // exibir formulário de edição do registro
     {
         $unidades = Unidade::all();
-        return view('app.product.edit', ['produto' => $produto->id, 'unidades' => $unidades]);
+        $fornecedores = Fornecedor::all();
+        return view('app.product.edit', ['produto' => $produto->id, 'unidades' => $unidades, 'fornecedores' => $fornecedores]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Produto  $produto
+     * @param  \App\Models\Item  $produto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Produto $produto) // receber formulário de criação do registro
+    public function update(Request $request, Item $produto) // receber formulário de criação do registro
     {
 
         $produto->update($request->all());
