@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Pedido;
+use App\Models\Cliente;
 
 class OrderController extends Controller
 {
@@ -11,9 +13,12 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+
+        $pedidos = Pedido::paginate(10);
+
+        return view('app.order.index', ['pedidos' => $pedidos, 'request' => $request->all()]);
     }
 
     /**
@@ -23,7 +28,9 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+
+        $clientes = Cliente::all();
+        return view ('app.order.create', ['clientes' => $clientes]);
     }
 
     /**
@@ -34,7 +41,27 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
+        $regras = [
+
+            'cliente_id' => 'exists:cliente,id'
+
+        ];
+
+        $feedback = [
+           
+            'cliente_id.exists' => 'O cliente não existe'
+       
+        ];
+
+        $request->validate($regras, $feedback);
+
+        $pedido = new Pedido();
+        $pedido->cliente_id = $request->get('cliente_id');
+        $pedido->save();
+
+        return redirect()->route('order.index');
+
     }
 
     /**

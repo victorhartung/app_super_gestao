@@ -1,16 +1,16 @@
 @extends('app.layouts.basic')
-@section('titulo', 'Cliente')
+@section('titulo', 'Pedido')
 @section('content')
 
     <div class="conteudo-pagina">
         
         <div class="titulo-pagina-2">
-            <p>Listagem de Clientes</p>
+            <p>Listagem de Pedidos</p>
         </div>
 
         <div class="menu">
             <ul>
-                <li><a href="{{route('client.create')}}">Novo</a></li>
+                <li><a href="{{route('order.create')}}">Novo</a></li>
                 <li><a href="">Consulta</a></li>
             </ul>
         </div>
@@ -20,43 +20,43 @@
                 <table border="1" width="100%">
                     <thead>
                         <tr>
-                            <th>Nome</th>
-
-                            <th></th>
+                            <th>ID Pedido</th>
+                            <th>Cliente</th>
                             <th></th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($clientes as $cliente)
+                        @foreach($pedidos as $pedido)
                         <tr>
                             
-                            <td>{{ $cliente->nome }}</td>
-                            <td><a href="{{ route('cliente.show', ['cliente' => $cliente->id]) }}">Visualizar</a></td>
+                            <td>{{ $pedido->id }}</td>
+                            <td>{{ $pedido->cliente_id }}</td>
+                            <td><a href="{{ route('order.show', ['pedido' => $pedido->id]) }}">Visualizar</a></td>
                             
                                 <td>
-                                    <form method="post" id="form_{{$cliente->id}}" action="{{route('cliente.destroy', ['cliente' => $cliente->id])}}">
+                                    <form method="post" id="form_{{$pedido->id}}" action="{{route('order.destroy', ['pedido' => $pedido->id])}}">
                                         @csrf
                                         @method('DELETE')
                                         {{-- <button type="submit">Excluir</button> --}}
-                                        <a href="#" onclick="document.getElementbyId('form_{{$cliente->id}}').submit()">Excluir</a>
+                                        <a href="#" onclick="document.getElementbyId('form_{{$pedido->id}}').submit()">Excluir</a>
                                     </form>
                                 </td>
                             
-                            <td><a href="{{ route('cliente.edit', ['cliente' => $cliente->id]) }}">Editar</a></td>
+                            <td><a href="{{ route('order.edit', ['pedido' => $pedido->id]) }}">Editar</a></td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>  
-                {{ $clientes->appends($request)->links() }} 
+                {{ $pedidos->appends($request)->links() }} 
                 <br>
-                {{ $clientes->count() }} - Total de registros por página   
+                {{ $pedidos->count() }} - Total de registros por página   
                 <br>
-                {{ $clientes->total() }} - Total de registros por consulta
+                {{ $pedidos->total() }} - Total de registros por consulta
                 <br>
-                {{ $clientes->firstItem() }} - Número do primeiro registro da página
+                {{ $pedidos->firstItem() }} - Número do primeiro registro da página
                 <br>
-                {{ $clientes->lastItem() }} - Número do último registro da página
+                {{ $pedidos->lastItem() }} - Número do último registro da página
                 
             </div>       
         </div>
