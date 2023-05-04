@@ -22,8 +22,8 @@
                         <tr>
                             <th>ID Pedido</th>
                             <th>Cliente</th>
-                            <th></th>
-                            <th></th>
+                            <th><a href="{{route('order-product.create', ['pedido' => $pedido->id])}}">Adicionar Produtos</a></th>
+                            <th><a href="{{route('order.show', ['pedido' => $pedido->id])}}"></a></th>
                         </tr>
                     </thead>
                     <tbody>

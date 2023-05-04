@@ -18,7 +18,7 @@ class ProductController extends Controller
      */
     public function index(Request $request) //exibir lista de registros
     {
-        $produtos = Item::paginate(10);
+        $produtos = Item::with(['itemDetalhe', 'fornecedor'])->paginate(10);
 
         // foreach($produtos as $key => $produto){ 
             
@@ -77,7 +77,7 @@ class ProductController extends Controller
 
         $request->validate($regras, $feedback);
 
-        Produto::create($request->all());
+       Item::create($request->all());
 
         // $produto = new Produto();
 
@@ -141,6 +141,6 @@ class ProductController extends Controller
     {
         $produto->delete();
      
-        return redirect()->route('product.index', ['produto' => $produto->id]);
+        return redirect()->route('product.index');
     }
 }

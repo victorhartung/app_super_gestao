@@ -93,7 +93,7 @@ class ProviderController extends Controller
     public function delete($id) {
         
         Fornecedor::find($id)->delete();
-        Fornecedor::find($id)->forceDelete();
+        //Fornecedor::find($id)->forceDelete();
 
         return redirect()->route('app.fornecedor');
     }

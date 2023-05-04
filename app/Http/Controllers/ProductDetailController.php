@@ -41,7 +41,7 @@ class ProductDetailController extends Controller
     public function store(Request $request)
     {
         ProdutoDetalhe::create($request->all());
-
+        echo 'Cadastro realizado com sucesso!';
         
     }
 

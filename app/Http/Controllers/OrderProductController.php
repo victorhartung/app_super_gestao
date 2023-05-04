@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Pedido;
+use App\Models\Produto;
+use App\Models\PedidoProduto;
+
 
 class OrderProductController extends Controller
 {
@@ -21,9 +25,10 @@ class OrderProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Pedido $pedido)
     {
-        //
+        $produtos = Produto::all();
+        return view('app.order-product.create', ['pedido' => $pedido, 'produtos' => $produtos]);
     }
 
     /**
@@ -32,9 +37,50 @@ class OrderProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Pedido $pedido)
     {
-        //
+        $regras = [
+
+            'produto_id' => 'exists:produtos, id',
+
+        ];
+
+        $feedbacks = [
+
+            'produtos_id.exists' => 'O produto não existe'
+
+        ];
+
+        $request->validate($regras, $feedbacks);
+
+         /*
+        $pedidoProduto = new PedidoProduto();
+        $pedidoProduto->pedido_id = $pedido->id;
+        $pedidoProduto->produto_id = $request->get('produto_id');
+        $pedidoProduto->quantidade = $request->get('quantidade');
+        $pedidoProduto->save();
+        */
+
+        //$pedido->produtos //os registros do relacionamento
+        /*
+        $pedido->produtos()->attach(
+            $request->get('produto_id'),
+            [
+                'quantidade' => $request->get('quantidade'),
+                'coluna_1' => '',
+                'coluna_2' => '',
+            ]
+        ); //objeto
+        //pedido_id
+        */
+
+        $pedido->produtos()->attach([
+            $request->get('produto_id') => ['quantidade' => $request->get('quantidade')]
+        ]);
+
+        return redirect()->route('pedido-produto.create', ['pedido' => $pedido->id]);
+
+
     }
 
     /**
@@ -77,8 +123,30 @@ class OrderProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(PedidoProduto $pedidoProduto, $pedido_id)
     {
-        //
+          /*
+        print_r($pedido->getAttributes());
+        echo '<hr>';
+        print_r($produto->getAttributes());
+        */
+
+        //echo $pedido->id.' - '.$produto->id;
+
+        //convencional
+        /*
+        PedidoProduto::where([
+            'pedido_id' => $pedido->id,
+            'produto_id' => $produto->id
+        ])->delete();
+        */
+
+        //detach (delete pelo relacionamento)
+        //$pedido->produtos()->detach($produto->id);
+        //produto_id
+
+        $pedidoProduto->delete();
+        
+        return redirect()->route('pedido-produto.create', ['pedido' => $pedido_id]);
     }
 }

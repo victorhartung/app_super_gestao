@@ -7,9 +7,12 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ClientController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductDetailController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderProductController;
+use App\Http\Controllers\ClientController;
+
 
 
 /*
@@ -54,11 +57,19 @@ Route::prefix('/app')->group(function(){
 
         Route::resource('product-detail', ProductDetailController::class);
 
-        Route::resource('/client', [ClientController::class, 'index']);
+        Route::resource('/client', ClientController::class);
 
-        Route::resource('/order', [OrderController::class, 'index']);
+        Route::resource('/order', OrderController::class);
 
-        Route::resource('/order-product', [OrderProductController::class, 'index']);
+        Route::get('/order-product/create/{pedido}', [OrderProductController::class, 'create'])->name('order-product.create');
+        Route::post('/order-product/store/{pedido}', [OrderProductController::class, 'store'])->name('order-product.store');
+        Route::delete('order-product.destroy/{pedidoProduto}/{pedido_id}', [OrderProductController::class,'destroy'])->name('order-product.destroy');
+
     });
 
+});
+
+
+Route::fallback(function() {
+    echo 'A rota acessada não existe. <a href="'.route('site.index').'">clique aqui</a> para ir para página inicial';
 });
